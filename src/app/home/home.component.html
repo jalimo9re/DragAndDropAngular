@@ -1,0 +1,18 @@
+<div style="padding: 13px">
+  <mat-spinner *ngIf="exercises?.length === 0"></mat-spinner>
+  <mat-card *ngFor="let exercise of exercises" style="margin-top: 10px">
+    <mat-card-header>
+      <mat-card-title>{{ exercise.name }}</mat-card-title>
+      <mat-card-subtitle>{{ exercise.description }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        {{ exercise.description }}
+      </p>
+      <img style="height: 100; width: 100" src="{{ exercise.icon }}" />
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button>aa</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

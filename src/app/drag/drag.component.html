@@ -1,0 +1,76 @@
+<mat-spinner *ngIf="exercises?.length === 0"></mat-spinner>
+<div>
+  <as-split direction="horizontal" style="height: 100%">
+    <as-split-area [size]="40" style="background-color: red; height: 100%">
+      <div
+        cdkDropList
+        id="origin"
+        [cdkDropListData]="exercises"
+        [cdkDropListConnectedTo]="LIST_IDS"
+        (cdkDropListDropped)="drop($event)"
+        style="background-color: red; width: 100%; min-height: 150"
+      >
+        <mat-card
+          *ngFor="let exercise of exercises"
+          style="margin: 10px"
+          cdkDrag
+          [cdkDragData]="exercise"
+        >
+          <mat-card-header>
+            <mat-card-title>{{ exercise.name }}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <img
+              style="height: 5vh; width: 100%; object-fit: contain"
+              src="{{ exercise.icon }}"
+            />
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </as-split-area>
+    <as-split-area
+      [size]="60"
+      style="
+        background-color: red;
+        width: 100%;
+        min-height: 200;
+        display: block;
+      "
+    >
+      <div>
+        <div
+          [cdkDropListData]="exercisesSel"
+          cdkDropList
+          id="cdk-drop-list-01"
+          (cdkDropListDropped)="drop($event)"
+          style="width: 100%; min-height: 100%"
+        >
+          <mat-card
+            *ngFor="let exercise of exercisesSel"
+            style="margin: 10px"
+            cdkDrag
+            [cdkDragData]="exercise"
+          >
+            <mat-card-header>
+              <mat-card-title>Exercise: {{ exercise.name }}</mat-card-title>
+              <mat-card-title>Order : {{ exercise.order }}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <img
+                mat-card-image
+                style="height: 5vh; width: 100%; object-fit: contain"
+                src="{{ exercise.icon }}"
+              />
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-button (click)="remove(exercise)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </mat-card-actions>
+            <mat-card-footer>Duration {{ exercise.duration }}</mat-card-footer>
+          </mat-card>
+        </div>
+      </div>
+    </as-split-area>
+  </as-split>
+</div>
